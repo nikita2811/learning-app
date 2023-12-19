@@ -23,7 +23,7 @@
           <div class="form-group mb-4">
             <label>Password</label>
             <v-text-field type="password" variant="solo" v-model="password" color="f3f3f3" bg-color=" #f8fafc"
-              :rules="[required('password'), minLength('password', 6)]"></v-text-field>
+              :rules="[required('password'), minLength('password', 8)]"></v-text-field>
           </div>
           <div class="form-group mb-4">
             <label>Confirm Password</label>
@@ -56,7 +56,7 @@ export default {
         return value => !!value || `${propertyType} is required`
       },
       minLength(propertyType, minLength) {
-        return value => (value && value.length >= 6) || `${propertyType} must have ${minLength} characters`
+        return value => (value && value.length >= minLength) || `${propertyType} must have ${minLength} characters`
       },
 
       rules: {

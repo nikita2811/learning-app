@@ -11,8 +11,11 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
-    public function passwordReset()
+    public function test()
     {
-        return redirect('reset-password');
+        dd(Auth::check());
+        //echo "Hello";
+        // $vueRoute = 'login';
+        // return redirect($vueRoute);
     }
 }

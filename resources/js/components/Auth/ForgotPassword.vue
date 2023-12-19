@@ -53,10 +53,8 @@ export default {
         forgotPassword() {
             axios.post('api/forgot-password', { email: this.email })
                 .then((res) => {
-                    console.log([res.data.message])
                     this.emitter.emit('getNotification', { 'eventContent': [res.data.message], type: 'success' })
                 }).catch((error) => {
-                    console.log(error)
                     this.emitter.emit('getNotification', { 'eventContent': error.response.data.errors, type: 'error' })
                 })
         }

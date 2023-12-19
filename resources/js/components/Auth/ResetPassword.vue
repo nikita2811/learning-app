@@ -7,11 +7,7 @@
             </v-card-item>
             <v-card-text>
                 <v-form v-model="valid" @submit.prevent="resetPassword">
-                    <div class="form-group mb-4">
-                        <label>Email</label>
-                        <v-text-field type="email" variant="solo" v-model="email" color="f3f3f3" bg-color=" #f8fafc"
-                            :rules="[required('email'), rules.email]"></v-text-field>
-                    </div>
+
                     <div class="form-group mb-4">
                         <label>New Password</label>
                         <v-text-field type="password" variant="solo" v-model="password" color="f3f3f3" bg-color=" #f8fafc"
@@ -35,6 +31,7 @@
 </template>
 <script>
 export default {
+
     data() {
         return {
 
@@ -53,31 +50,31 @@ export default {
 
                 confirm: value => (value === this.password) || 'password not matched',
             },
-            email: '',
             password: '',
             password_confirmation: '',
             type: '',
             valid: false,
-            token: '',
+
         }
 
     },
     mounted() {
-        console.log(this.$route.params)
+
     },
     methods: {
         resetPassword() {
 
             axios.post('api/reset-password', {
-                email: this.email,
+                email: this.$route.query.email,
                 password: this.password,
                 password_confirmation: this.password_confirmation,
-                // token: 'xyz',
+                token: this.$route.query.token,
             })
                 .then((res) => {
-                    console.log(res)
+                    this.emitter.emit('getNotification', { 'eventContent': [res.data.message], type: 'success' })
+                    this.$router.push({ name: 'login' })
                 }).catch((error) => {
-                    console.log(error)
+                    this.emitter.emit('getNotification', { 'eventContent': error.response.data.errors, type: 'error' })
                 })
         }
     }

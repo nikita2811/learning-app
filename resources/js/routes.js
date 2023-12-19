@@ -7,7 +7,7 @@ const routes = [
     {
         path: '/',
         name: "Dashboard",
-        component: () => import('./components/Home.vue')
+        component: () => import('./components/Dashboard.vue')
     },
 
     {
@@ -29,8 +29,22 @@ const routes = [
         path: '/reset-password',
         name: "reset-password",
         component: () => import('./components/Auth/ResetPassword.vue'),
-        props: route => ({ query: route.query.token })
-    }
+        props: route => ({
+            token: route.query.token,
+            email: route.query.email
+        }),
+
+
+
+
+    },
+
+
+    {
+        path: '/tasks',
+        name: "Tasks",
+        component: () => import('./components/Tasks.vue')
+    },
 
 ]
 

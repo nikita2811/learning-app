@@ -29,7 +29,7 @@
             <label>Password</label>
             <router-link to="/forgot-password" style="text-decoration:none;float: right;">Forgot Password?</router-link>
             <v-text-field type="password" variant="solo" v-model="password" color="f3f3f3" bg-color=" #f8fafc"
-              :rules="[required('password'), minLength('password', 6)]"></v-text-field>
+              :rules="[required('password'), minLength('password', 8)]"></v-text-field>
           </div>
           <!-- Submit Button -->
           <div class="buttons-w mt-4 float-right mb-4">
@@ -55,7 +55,7 @@ export default {
         return value => !!value || `${propertyType} is required`
       },
       minLength(propertyType, minLength) {
-        return value => (value && value.length >= 6) || `${propertyType} must have ${minLength} characters`
+        return value => (value && value.length >= 8) || `${propertyType} must have ${minLength} characters`
       },
 
       rules: {
@@ -80,26 +80,21 @@ export default {
 
   methods: {
     login() {
-
-      axios.post('api/login', {
-        email: this.email,
-        password: this.password,
-      }).then((res) => {
-
-        if (res.data.status) {
-          this.type = 'success';
-        } else {
-          this.type = 'error';
-        }
-        this.$router.push({ name: 'Dashboard' })
+      axios.get('/sanctum/csrf-cookie').then((res) => {
+        axios.post('api/login', {
+          email: this.email,
+          password: this.password,
+        }).then((res) => {
+          this.$router.push({ name: 'Dashboard' })
 
 
-      }).catch((error) => {
+        }).catch((error) => {
 
-        this.errors = error.response.data.errors
-        this.emitter.emit('getNotification', { 'eventContent': this.errors, type: 'error' })
+          this.errors = error.response.data.errors
+          this.emitter.emit('getNotification', { 'eventContent': this.errors, type: 'error' })
 
 
+        })
       })
     },
 
