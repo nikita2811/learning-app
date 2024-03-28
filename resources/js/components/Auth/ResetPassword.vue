@@ -10,7 +10,8 @@
 
                     <div class="form-group mb-4">
                         <label>New Password</label>
-                        <v-text-field type="password" variant="solo" v-model="password" color="f3f3f3" bg-color=" #f8fafc"
+                        <v-text-field type="password" variant="solo" v-model="password" color="f3f3f3"
+                            bg-color=" #f8fafc"
                             :rules="[required('password'), minLength('password', 6)]"></v-text-field>
                     </div>
                     <div class="form-group mb-4">

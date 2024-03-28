@@ -81,25 +81,25 @@ export default {
 
 
     register() {
-
-      axios.post('api/register', {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.password_confirmation,
-      }).then((res) => {
-
-
-        this.$router.push({ name: 'Dashboard' })
+      axios.get('/sanctum/csrf-cookie').then((res) => {
+        axios.post('api/register', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        }).then((res) => {
 
 
-      }).catch((error) => {
+          this.$router.push({ name: 'Dashboard' })
 
-        this.emitter.emit('getNotification', { 'eventContent': error.response.data.errors, type: 'error' })
+
+        }).catch((error) => {
+
+          this.emitter.emit('getNotification', { 'eventContent': error.response.data.errors, type: 'error' })
+        })
+
+
       })
-
-
-
 
 
     },
@@ -115,11 +115,6 @@ export default {
   /* Adjust this value to control the roundness of the text field */
 }
 </style>
-Again, please check the official Vuetify 3 documentation or release notes for the specific property or class name that should be used to achieve rounded text fields in Vuetify 3, as there may have been changes or improvements in the framework since my last update.
-
-
-
-
-
-
-
+Again, please check the official Vuetify 3 documentation or release notes for the specific property or class name that
+should be used to achieve rounded text fields in Vuetify 3, as there may have been changes or improvements in the
+framework since my last update.

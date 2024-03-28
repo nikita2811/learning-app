@@ -11,6 +11,9 @@
                 <th class="text-left">
                     Status
                 </th>
+                <th class="text-left">
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +21,10 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.priority }}</td>
                 <td>{{ item.status }}</td>
+                <td><v-btn variant="text" icon="mdi-update"></v-btn>
+                    <v-btn variant="text" icon="mdi-checkbox-marked-circle-outline"></v-btn>
+                    <v-btn variant="text" icon="mdi-delete"></v-btn>
+                </td>
             </tr>
         </tbody>
     </v-table>
@@ -25,12 +32,13 @@
 <script>
 export default {
     props: ['tasks'],
-    // data() {
-    //     return {
-    //       tasks:[],
-    //     }
+    data() {
+        return {
 
-    // },
+
+        }
+
+    },
 
 }
 </script>

@@ -28,6 +28,6 @@
         "vuedraggable": "^2.24.3",
         "vuelidate": "^0.7.7",
         "vuetify": "^3.3.0",
-        "vuex": "^4.0.2"
+        "vuex": "^4.1.0"
     }
 }

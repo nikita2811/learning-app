@@ -44,7 +44,8 @@
 </template>
 <script>
 
-
+import { useStore } from 'vuex';
+import { ref } from 'vue';
 
 export default {
 
@@ -85,6 +86,9 @@ export default {
           email: this.email,
           password: this.password,
         }).then((res) => {
+          this.authenticated = true
+          this.$store.dispatch('login', res.data.user);
+          this.checkAuthentication()
           this.$router.push({ name: 'Dashboard' })
 
 
@@ -103,4 +107,3 @@ export default {
 }
 
 </script>
-

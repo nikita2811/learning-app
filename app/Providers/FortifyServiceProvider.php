@@ -36,7 +36,8 @@ class FortifyServiceProvider extends ServiceProvider
                     $user = User::where('email', $request->email)->first();
                     return response()->json([
                         "message" => "You are successfully logged in",
-                        "token" => $user->createToken($request->email)->plainTextToken
+                        "token" => $user->createToken($request->email)->plainTextToken,
+                        "user" => $user
                     ]);
                 }
 
@@ -55,7 +56,8 @@ class FortifyServiceProvider extends ServiceProvider
                     return response()->json([
                         "message" => "Registration Successful",
                         "token" => $user->createToken($request->email)->plainTextToken
-                    ]);
+                    ], 200);
+                    // redirect()->intended(Fortify::redirects('register'));
                 }
 
 
@@ -82,6 +84,10 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(5)->by($throttleKey);
         });
+
+        // Fortify::verifyEmailView(function () {
+        //     return view('auth.verify-email');
+        // });
 
         // RateLimiter::for('two-factor', function (Request $request) {
         //     return Limit::perMinute(5)->by($request->session()->get('login.id'));
